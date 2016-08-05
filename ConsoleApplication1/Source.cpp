@@ -18,7 +18,7 @@ void Print(int n)
 	cin >> n;
 }
 
-void XoanOc(int k, int b, int n)
+void XoanOcDeQuy(int k, int b, int n)
 {
 	if (n % 2 ==1 )
 		if (b == (n / 2)) { a[n / 2][n / 2] = k; return; }
@@ -30,12 +30,30 @@ void XoanOc(int k, int b, int n)
 	for (int i = (n - b - 1); i > b+1; i--) a[i-1][b] = k++;
 	
 	b++;
-	XoanOc(k, b, n);
+	XoanOcDeQuy(k, b, n);
 
+}
+
+void XoanOcVongLap(int n)
+{
+	int b = 0;
+	int k = 1;
+
+	while (b < n)
+	{
+		
+		for (int i = b; i < n - b; i++) a[b][i] = k++;
+		for (int i = b + 1; i < n - b; i++) a[i][n - b - 1] = k++;
+		for (int i = (n - b - 1); i > b; i--) a[n - b - 1][i - 1] = k++;
+		for (int i = (n - b - 1); i > b + 1; i--) a[i - 1][b] = k++;
+
+		b++; 
+	}		
 }
 
 void main()
 {
-	XoanOc(1, 0, 10);
-	Print(10);
+	//XoanOcDeQuy(1, 0, 10);
+	XoanOcVongLap(5);
+	Print(5);
 }
